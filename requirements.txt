@@ -3,8 +3,10 @@ chromadb>=0.6.0
 groq==0.15.0
 python-dotenv==1.0.1
 
-# Query interface — add whichever you use for Milestone 5:
-# gradio>=6.9.0
+# Query interface — Gradio web UI (Milestone 5).
+# gradio>=6.9.0 needs Python >=3.10; this project runs on 3.9, so we pin to the
+# newest Gradio that supports 3.9. app.py also works as a plain CLI with no extra deps.
+gradio>=4.44,<5
 # streamlit>=1.40.0
 
 # Document ingestion — add if your documents/ folder contains .pdf files:

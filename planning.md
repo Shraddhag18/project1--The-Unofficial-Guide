@@ -51,22 +51,34 @@ official or unofficial.
 
 ## Chunking Strategy
 
-**Chunk size:** ~900 characters (≈ 200–225 tokens).
+**Chunk size:** ~600 characters (≈ 130–150 tokens).
 
-**Overlap:** 150 characters.
+**Overlap:** 120 characters.
 
 **Reasoning:** The embedding model (all-MiniLM-L6-v2) silently truncates input
 past 256 word-pieces, so a chunk much larger than ~1000 characters would lose
-text at embed time. 900 characters keeps every chunk safely inside that window.
+text at embed time. 600 characters keeps every chunk well inside that window.
 The documents are short, fact-dense reference pages (price lists, hours,
 amenity bullets) rather than long narrative, so a moderate chunk keeps a
 self-contained topic (e.g. one permit price table, one residence hall's
-amenities) together. The 150-char overlap means a fact that lands on a chunk
+amenities) together. The 120-char overlap means a fact that lands on a chunk
 boundary — like a price line right after a heading — is still recoverable from
 the neighboring chunk. I split on paragraph/sentence boundaries first and only
 hard-cut a single oversized block, so chunks stay coherent instead of being
-sliced mid-sentence. Across the 10 documents this produced **27 chunks**
-(avg 729 chars, max 897).
+sliced mid-sentence. Across the 10 documents this produced **40 chunks**
+(avg 518 chars, max 598).
+
+**Revision (Milestone 4):** I originally specced 900/150, which gave 27 chunks.
+Retrieval testing showed that was a little too large: a few documents bundle
+several subtopics into one chunk (the transit page mixes Valley Metro + FLASH +
+intercampus shuttle; the dining page bundles the M&G explanation with other FAQ
+items), which diluted the embedding. Two eval queries — the FLASH shuttle and
+M&G Dollars — came back with a top-result cosine distance of 0.50 and 0.52,
+above the 0.5 "strong match" bar. Re-chunking at 600/120 dropped every query's
+top distance below 0.5 (FLASH 0.50→0.41, M&G 0.54→0.32) while all five answers
+stayed accurate and the out-of-corpus query still abstained. Going smaller still
+(350) pushed two queries back over 0.5, so ~600 is the sweet spot for this
+short-document corpus.
 
 ---
 
@@ -144,9 +156,9 @@ document, so they also test whether retrieval routes to the correct source.
                                    │  Document(text, metadata)
             ┌──────────────────────┴───────────────────────┐
             │ STAGE 2 — Chunking         rag/chunk.py         │
-            │ ~900-char chunks, 150 overlap, boundary-aware   │
+            │ ~600-char chunks, 120 overlap, boundary-aware   │
             └──────────────────────┬───────────────────────┘
-                                   │  Chunk[]  (27 chunks)
+                                   │  Chunk[]  (40 chunks)
             ┌──────────────────────┴───────────────────────┐
             │ STAGE 3 — Embed + Store    rag/index.py         │
             │ all-MiniLM-L6-v2  →  ChromaDB (cosine, on disk) │

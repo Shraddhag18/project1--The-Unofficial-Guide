@@ -18,8 +18,8 @@ COLLECTION_NAME = "asu_campus_life"
 # chunks comfortably under that so no text is silently dropped at embed time.
 # ~900 chars ≈ 200-225 tokens. 150-char overlap keeps a sentence that straddles
 # a boundary recoverable from at least one chunk.
-CHUNK_SIZE = 900          # characters
-CHUNK_OVERLAP = 150       # characters
+CHUNK_SIZE = 600          # characters
+CHUNK_OVERLAP = 120       # characters
 
 # --- Embeddings --------------------------------------------------------------
 EMBED_MODEL = "all-MiniLM-L6-v2"   # local, no API key, 384-dim

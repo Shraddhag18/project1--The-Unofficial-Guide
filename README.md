@@ -50,7 +50,8 @@ its title, source URL, and whether it is official or unofficial.
 
 ## Chunking Strategy
 
-**Chunk size:** ~600 characters (≈ 130–150 tokens).
+**Chunk size:** ~600 characters (≈ 130–150 tokens) as a **ceiling**, not a fixed
+length. Chunks are not padded to exactly 600 — see "Why the sizes vary" below.
 
 **Overlap:** 120 characters.
 
@@ -76,23 +77,36 @@ every query's top distance below 0.5 (FLASH 0.50→0.41, M&G 0.54→0.32) while
 keeping all five answers accurate. Going smaller still (350) pushed two queries
 back over 0.5 (lost context), so ~600 is the sweet spot for this corpus.
 
-**Final chunk count:** **40 chunks** across 10 documents (avg 518 chars, max 598).
+**Why the sizes vary (and why that's expected):** because the splitter packs
+whole sentences/paragraphs up to the 600-char ceiling and stops at the last
+boundary that fits, chunks land in a band (most are **530–598 chars**) rather
+than all being identical — it never slices mid-sentence to hit a round number.
+The smaller chunks are **document "tails":** the leftover text at the end of a
+document after the full chunks are packed (e.g. a ~1,800-char page → three ~590
+chunks + one ~230 remainder). Every chunk under ~350 chars is the last chunk of
+its document. This variation is the cost of keeping chunks semantically intact,
+which is exactly what makes them self-contained and readable; a fixed-length
+cutter would give uniform sizes only by chopping words and sentences in half.
+
+**Final chunk count:** **40 chunks** across 10 documents — sizes range from 215
+to 598 chars (avg 518). The 215–350 char chunks are all document tails, as
+described above.
 
 ### Sample chunks (5, each labeled with its source document)
 
-**Chunk #0 — source: `01_parking_official.md`**
+**Chunk #0 — source: `01_parking_official.md` (590 chars)**
 > # ASU Tempe Campus Parking (Parking & Transit Services) Three permit categories are available: automobile, motorcycle, and sustainable (HOV) options. Permits are purchased through the transportation portal at asu.aimsparking.com. ... ## Commuter automobile permit prices (per year) - Apache Boulevard, Rural Road, Tyler Street: $950 - Lot 32: $820
 
-**Chunk #6 — source: `02_parking_student_guide.md`**
+**Chunk #6 — source: `02_parking_student_guide.md` (585 chars)**
 > from about $210 to $780 per academic year depending on the zone — always re-check current rates each year on ASU's site. ## Timing is everything Plan to arrive before 9:00 AM for the best chance at an open spot. ... ## Skip parking entirely - Valley Metro light rail and buses reach campus and downtown Tempe directly. - Biking is genuinely viable on the flat Tempe campus...
 
-**Chunk #14 — source: `04_housing_hassayampa.md`**
+**Chunk #14 — source: `04_housing_hassayampa.md` (536 chars)**
 > # Hassayampa Academic Village (HAV), Tempe Campus ## Who lives here Hassayampa Academic Village houses students from the W. P. Carey School of Business. ... ## Rooms and suites HAV offers double-occupancy accommodations with suite-style bathrooms. Room options include shared rooms with shared baths (3-bed and standard configurations) and private rooms with private baths. Twin XL beds (36x80...
 
-**Chunk #22 — source: `06_sun_devil_fitness.md`**
+**Chunk #22 — source: `06_sun_devil_fitness.md` (595 chars)**
 > # Sun Devil Fitness Complex (SDFC), Tempe Campus The SDFC opened on August 21, 1989... ## Access / membership All fee-paying ASU students are automatically members of the Sun Devil Fitness Complex through their ASU registration fees... ## Weights and cardio - Two weight rooms plus a circuit-training room - Over 100 pieces of cardio equipment...
 
-**Chunk #33 — source: `09_hayden_library.md`**
+**Chunk #33 — source: `09_hayden_library.md` (594 chars)**
 > ... - **Level One:** the Wurzburger Reading Room and the Luhrs Arizona Reading Room, featured collections... - **Level Two:** book stacks (Sun Devil Reads, Labriola Open Stack...), the Zine Collection... - **Level Three:** the Makerspace, the Map and Geospatial Hub, Naturespace...
 
 Each chunk is a complete, retrievable thought tied to one topic, with its source

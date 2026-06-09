@@ -360,8 +360,9 @@ is the spec doing its job: the divergence was driven by evidence, and documented
 
 ## AI Usage
 
-> *Note: these describe how I directed an AI coding assistant (Claude) during this
-> project. Review and adjust to your own voice before submitting.*
+I used Claude (via Claude Code) as a coding assistant throughout this project,
+directing it from my `planning.md` spec and overriding its output where my own
+testing disagreed with it. Two representative instances:
 
 **Instance 1 — chunking implementation, then evidence-driven tuning**
 - *What I gave the AI:* my `planning.md` Documents and Chunking Strategy sections

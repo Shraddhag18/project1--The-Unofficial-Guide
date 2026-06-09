@@ -95,19 +95,29 @@ described above.
 ### Sample chunks (5, each labeled with its source document)
 
 **Chunk #0 — source: `01_parking_official.md` (590 chars)**
-> # ASU Tempe Campus Parking (Parking & Transit Services) Three permit categories are available: automobile, motorcycle, and sustainable (HOV) options. Permits are purchased through the transportation portal at asu.aimsparking.com. ... ## Commuter automobile permit prices (per year) - Apache Boulevard, Rural Road, Tyler Street: $950 - Lot 32: $820
+```text
+# ASU Tempe Campus Parking (Parking & Transit Services) Three permit categories are available: automobile, motorcycle, and sustainable (HOV) options. Permits are purchased through the transportation portal at asu.aimsparking.com. ... ## Commuter automobile permit prices (per year) - Apache Boulevard, Rural Road, Tyler Street: $950 - Lot 32: $820
+```
 
 **Chunk #6 — source: `02_parking_student_guide.md` (585 chars)**
-> from about $210 to $780 per academic year depending on the zone — always re-check current rates each year on ASU's site. ## Timing is everything Plan to arrive before 9:00 AM for the best chance at an open spot. ... ## Skip parking entirely - Valley Metro light rail and buses reach campus and downtown Tempe directly. - Biking is genuinely viable on the flat Tempe campus...
+```text
+from about $210 to $780 per academic year depending on the zone — always re-check current rates each year on ASU's site. ## Timing is everything Plan to arrive before 9:00 AM for the best chance at an open spot. ... ## Skip parking entirely - Valley Metro light rail and buses reach campus and downtown Tempe directly. - Biking is genuinely viable on the flat Tempe campus...
+```
 
 **Chunk #14 — source: `04_housing_hassayampa.md` (536 chars)**
-> # Hassayampa Academic Village (HAV), Tempe Campus ## Who lives here Hassayampa Academic Village houses students from the W. P. Carey School of Business. ... ## Rooms and suites HAV offers double-occupancy accommodations with suite-style bathrooms. Room options include shared rooms with shared baths (3-bed and standard configurations) and private rooms with private baths. Twin XL beds (36x80...
+```text
+# Hassayampa Academic Village (HAV), Tempe Campus ## Who lives here Hassayampa Academic Village houses students from the W. P. Carey School of Business. ... ## Rooms and suites HAV offers double-occupancy accommodations with suite-style bathrooms. Room options include shared rooms with shared baths (3-bed and standard configurations) and private rooms with private baths. Twin XL beds (36x80...
+```
 
 **Chunk #22 — source: `06_sun_devil_fitness.md` (595 chars)**
-> # Sun Devil Fitness Complex (SDFC), Tempe Campus The SDFC opened on August 21, 1989... ## Access / membership All fee-paying ASU students are automatically members of the Sun Devil Fitness Complex through their ASU registration fees... ## Weights and cardio - Two weight rooms plus a circuit-training room - Over 100 pieces of cardio equipment...
+```text
+# Sun Devil Fitness Complex (SDFC), Tempe Campus The SDFC opened on August 21, 1989... ## Access / membership All fee-paying ASU students are automatically members of the Sun Devil Fitness Complex through their ASU registration fees... ## Weights and cardio - Two weight rooms plus a circuit-training room - Over 100 pieces of cardio equipment...
+```
 
 **Chunk #33 — source: `09_hayden_library.md` (594 chars)**
-> ... - **Level One:** the Wurzburger Reading Room and the Luhrs Arizona Reading Room, featured collections... - **Level Two:** book stacks (Sun Devil Reads, Labriola Open Stack...), the Zine Collection... - **Level Three:** the Makerspace, the Map and Geospatial Hub, Naturespace...
+```text
+... - Level One: the Wurzburger Reading Room and the Luhrs Arizona Reading Room, featured collections... - Level Two: book stacks (Sun Devil Reads, Labriola Open Stack...), the Zine Collection... - Level Three: the Makerspace, the Map and Geospatial Hub, Naturespace...
+```
 
 Each chunk is a complete, retrievable thought tied to one topic, with its source
 filename attached in metadata. No fragments, empty strings, or HTML artifacts
